@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Fiel Site</title>
+</head>
+<body>
+<form action="{% url 'testing_view' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    {{ form.as_ul }}
+    <input type="submit" value="Vote" />
+
+</form>
+</body>
+</html>
