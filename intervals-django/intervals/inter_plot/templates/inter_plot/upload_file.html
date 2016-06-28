@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload Fiel Site</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 </head>
 <body>
 <form action="{% url 'testing_view' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>{{ form.non_field_errors }}</p>
-    {{ form.as_ul }}
+    {{ form.description }}
+    {{ form.file }}
+    <p>Date: <input type="text" id="datepicker" name="training_date"></p>
     <input type="submit" value="Vote" />
 
 </form>
+
+
+
+
 </body>
 </html>

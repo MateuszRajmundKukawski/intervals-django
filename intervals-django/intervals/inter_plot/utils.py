@@ -34,7 +34,7 @@ def obliczZakresyTetna(wiek, zakresyTetnaProcenty):
     return zakresyTetna
 
 
-def parseTraining(fileName):
+def parse_training(fileName, dt=True):
     listaPkt = []
     tetno = 0
     DOMTree = minidom.parse(fileName)
@@ -60,7 +60,11 @@ def parseTraining(fileName):
         czas2 = datetime.strptime(czas1, '%Y-%m-%d:%H:%M:%S')
         # timeDiff = czas2 - czasPoprz
         # print('Time = %s' % timeDiff
-        element = [Lat, Lon, czas2, float(tetno)]
+        if dt:
+            element = [Lat, Lon, czas2, float(tetno)]
+        else:
+            element = [Lat, Lon, str(czas2), float(tetno)]
+
         listaPkt.append(element)
     return listaPkt
 
@@ -243,7 +247,7 @@ def get_data(
     # accuracy_pace_diff_for_interval_search = sys.argv[2]
     # ccuracy_liczba_probek = sys.argv[3]
     zakresyTetna = obliczZakresyTetna(wiek, zakresyTetnaProcenty)
-    listaWspol = parseTraining(fileName)
+    listaWspol = parse_training(fileName)
     wykresTableX, wykresTableY, totalDistance, czasy, tetno = obliczPolozenie(listaWspol)
     wykresTableYAverage = averagingFilter(wykresTableY, filter_order)
     startInterwalu, stopInterwalu = szukajInterwalow(wykresTableYAverage, ccuracy_liczba_probek, accuracy_pace_diff_for_interval_search, point_distance_minimal_between_interwals)
@@ -302,6 +306,13 @@ def get_data(
     out_path = os.path.join(output_dir, base_name)
     plt.savefig(out_path)
     return base_name, print_list
+##############################
+# my utils
+##############################
+
+
+def datetime_js_to_date(js_date):
+    return datetime.strptime(js_date, '%M/%d/%Y')
 
 
 if __name__ == '__main__':

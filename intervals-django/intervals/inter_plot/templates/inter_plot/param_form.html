@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'testing_view' %}" method="post">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <table>
+    {{ form.as_table }}
+        </table>
+    <input type="submit" value="Vote" />
+
+</form>
+</body>
+</html>

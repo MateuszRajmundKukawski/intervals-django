@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainings list</title>
+</head>
+<body>
+{% if trainings %}
+<table>
+{% for training in trainings %}
+<tr>
+    <td>{{ training.id }}</td><td>{{ training.description }}</td><td>{{ training.pub_date }}</td><td>{{ training.training_date }}</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p>Brak terningow w bazie</p>
+{% endif %}
+</body>
